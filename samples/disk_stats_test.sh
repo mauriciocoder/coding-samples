@@ -66,7 +66,6 @@ SYS_STAT_END=$(cat /sys/block/"$DISK"/stat)
 check_return_code $? "Stats in /proc/diskstats did not change" \
     "$PROC_STAT_BEGIN" "$PROC_STAT_END"
 
-# Here it is missing the evaluation!
 check_return_code $? "Stats in /sys/block/$DISK/stat did not change" \
     "$SYS_STAT_BEGIN" "$SYS_STAT_END"
 
