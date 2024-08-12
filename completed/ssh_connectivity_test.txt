@@ -1,0 +1,80 @@
+# Technical Assessment: Test Case Portion
+
+This text file is for the "test case portion" of the technical assessment. I selected the following scenario:
+
+- **Testing SSH connectivity using Password and Key-based authentication**
+
+## Test Case Description
+
+Verify that SSH connectivity can be established using both password-based authentication and key-based authentication.
+
+### Tools Used
+- Unix-based server
+- Client terminal
+
+### Prerequisites
+
+1. Client terminal with SSH installed
+2. A server configured to accept SSH connections (SSH daemon running)
+3. Network connectivity between client and server (server can be reached from the client)
+
+---
+
+## Test Scenario 1: SSH Connectivity using Password-Based Authentication
+
+### Description
+
+Verify that the user (client) can establish an SSH connection using a username and password.
+
+### Setup
+
+1. The server is up and running, and it should allow password-based authentication. Set `PasswordAuthentication yes` in `/etc/ssh/sshd_config`.
+2. The user account is configured with a valid password on the server.
+
+### Test Steps
+
+1. From the client machine, initiate the SSH connection to the server:
+   ```bash
+   ssh username@server_ip
+   ```
+2. When prompted, enter the password.
+
+### Pass Criteria
+- The connection is successfully established, and the user is granted shell access.
+
+### Fail Criteria
+- The connection fails, or the user is denied access.
+
+### Teardown
+- Stop the server instance if it was created specifically for this test.
+
+---
+
+## Test Scenario 2: SSH Connectivity using Key-Based Authentication
+
+### Description
+
+Verify that the user (client) can establish an SSH connection using a valid private key.
+
+### Setup
+
+1. The server is up and running, and it should allow key-based authentication. Set `PubkeyAuthentication yes` in `/etc/ssh/sshd_config`.
+2. Save the corresponding public key in the user's `~/.ssh/authorized_keys` file on the server.
+3. Ensure the private key is available on the client machine.
+
+### Test Steps
+
+1. From the client machine, initiate the SSH connection to the server:
+   ```bash
+   ssh -i /path/to/private_key username@server_ip
+   ```
+2. Verify that the connection is established using the key and that no password prompt is displayed.
+
+### Pass Criteria
+- The connection is successfully established, and the user is granted shell access.
+
+### Fail Criteria
+- The connection fails, or the user is denied access.
+
+### Teardown
+- Stop the server instance if it was created specifically for this test.
