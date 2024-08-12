@@ -24,7 +24,8 @@ Verify that SSH connectivity can be established using both password-based authen
 
 ### Description
 
-Verify that the user (client) can establish an SSH connection using a username and password.
+Verify that the user (client) can establish an SSH connection using a configured username and password.
+Verify that the user does not establish connection with wrong combination of username and password.
 
 ### Setup
 
@@ -40,10 +41,8 @@ Verify that the user (client) can establish an SSH connection using a username a
 2. When prompted, enter the password.
 
 ### Pass Criteria
-- The connection is successfully established, and the user is granted shell access.
-
-### Fail Criteria
-- The connection fails, or the user is denied access.
+- If username and password matches, then the connection is successfully established, and the user is granted shell access.
+- If username does not exist or the password does not match, then the connection is not established.
 
 ### Teardown
 - Stop the server instance if it was created specifically for this test.
@@ -55,6 +54,7 @@ Verify that the user (client) can establish an SSH connection using a username a
 ### Description
 
 Verify that the user (client) can establish an SSH connection using a valid private key.
+Verify that the user does not establish connection using invalid private key.
 
 ### Setup
 
@@ -68,13 +68,10 @@ Verify that the user (client) can establish an SSH connection using a valid priv
    ```bash
    ssh -i /path/to/private_key username@server_ip
    ```
-2. Verify that the connection is established using the key and that no password prompt is displayed.
 
 ### Pass Criteria
-- The connection is successfully established, and the user is granted shell access.
-
-### Fail Criteria
-- The connection fails, or the user is denied access.
+- The connection is successfully established when using the configured key (no password is asked), and the user is granted shell access.
+- If key does not exist or is not configured, then the connection is not established.
 
 ### Teardown
 - Stop the server instance if it was created specifically for this test.
